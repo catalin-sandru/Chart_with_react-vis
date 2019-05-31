@@ -1,16 +1,23 @@
 import React from 'react'
 import { LegendStyle } from './legend.style';
 
-const ChartLegend = ({state, getItem}) => {
+const ChartLegend = ({state, toogleHighlightOn}) => {
 
   return(
     <div>
         {state.map(({label, angle, style, key}) => {
           return(
-            <LegendStyle color={style}>
+            <LegendStyle color={style} key={key}>
               <ul>
                 <li>
-                  <p onClick={() => getItem(key)}>{label} : <span>{angle}</span></p>
+                  <p onClick={() => 
+                    toogleHighlightOn(key)
+                  }>
+                    {label} : 
+                    <span>
+                      {angle}
+                    </span>
+                  </p>
                 </li>
               </ul>
             </LegendStyle>

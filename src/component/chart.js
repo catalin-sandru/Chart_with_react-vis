@@ -8,43 +8,44 @@ class Chart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      table1,
+      default: table1,
       table2,
-      getItem: this.getItem
+      toogleHighlightOn: this.toogleHighlightOn,
+      toogleHighlightOff:this.toogleHighlightOff
     }
   }
-  
-  getItem = key => {
-    let getInnerRadius = this.state.table1
-      .filter(e => e.key === key)
-      .reduce(i => i);
-    getInnerRadius.innerRadius = 1.5
-    getInnerRadius.active = true
-    console.log(getInnerRadius)
-    return this.setState(this.state)
-  }
 
+  toogleHighlightOn = key => {
+    table1.forEach(i => i.innerRadius = 0);
+    const newElement = table1.find(i => i.key === key);
+    if (newElement) {
+      newElement.innerRadius = 2;
+    }
+
+    return this.setState({
+      default: [...table1]
+    })
+  }
 
   render() {
     console.log(this.state)
     return(
       <DefaultChartStyle>
         <RadialChart
-          data={this.state.table1}
-          width={300}
-          height={300}
+          data={this.state.default}
+          width={400}
+          height={400}
           innerRadius={80}
           showLabels={true}
           padAngle={0.03}
           radius={120}
           labelsRadiusMultiplier={0.9}
-          colorRange={this.state.table1.map(e => e.style)}
-          // active={this.state.active}
-          // onValueClick={e => this.getItem(e)}
+          colorRange={this.state.default.map(e => e.style)}
         />
         <ChartLegend 
-          state={this.state.table1}
-          getItem={this.state.getItem}/>
+          state={table1}
+          toogleHighlightOn={this.state.toogleHighlightOn}
+        />
       </DefaultChartStyle>
     )
   }
