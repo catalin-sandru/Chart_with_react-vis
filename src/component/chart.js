@@ -15,13 +15,13 @@ class Chart extends Component {
   }
 
   toogleHighlightOn = key => {
-    table1.forEach(i => i.innerRadius = 0);
-    const newElement = table1.find(i => i.key === key);
+    this.state.default.forEach(i => i.innerRadius = 0);
+    const newElement = this.state.default.find(i => i.key === key);
     if (newElement) {
       newElement.innerRadius = 2;
     }
     return this.setState({
-      default: [...table1]
+      default: [...this.state.default]
     })
   }
 
@@ -61,7 +61,7 @@ class Chart extends Component {
           colorRange={this.state.default.map(e => e.style)}
         />
         <ChartLegend 
-          state={table1}
+          state={this.state.default}
           toogleHighlightOn={this.state.toogleHighlightOn}
           resetTable={() => this.resetTable()}
           loadSecondTable={() => this.loadSecondTable()}
