@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Chart from './component/chart';
+import Chart from './component/chart/';
 
 function App() {
   return (

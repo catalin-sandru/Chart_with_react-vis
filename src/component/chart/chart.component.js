@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import { RadialChart } from 'react-vis';
-import { table1, table2 } from './table'
-import ChartLegend from './legend';
-import { DefaultChartStyle } from './defaultChart.style';
+import { table1, table2 } from '../table'
+import ChartLegend from '../legend/legend.component';
+import { DefaultChartStyle } from './chart.style';
 
 class Chart extends Component {
   constructor(props) {
     super(props)
     this.state = {
       default: table1,
+      data: [],
       toogleHighlightOn: this.toogleHighlightOn,
       toogleHighlightOff:this.toogleHighlightOff
     }
   }
 
   toogleHighlightOn = key => {
-    this.state.default.forEach(i => i.innerRadius = 0);
-    const newElement = this.state.default.find(i => i.key === key);
+    this.state.default&&this.state.data.forEach(i => i.innerRadius = 0);
+    const newElement = this.state.default&&this.state.data.find(i => i.key === key);
     if (newElement) {
       newElement.innerRadius = 2;
     }
     return this.setState({
-      default: [...this.state.default]
+      default: [...this.state.default],
+      data: [...this.state.data]
     })
   }
 
   resetTable = () => {
     table1.forEach(i => i.innerRadius = 0)
     return this.setState({
-      default: [...table1]
+      default: [...table1],
+      data: []
     })
   }
 
@@ -41,7 +44,7 @@ class Chart extends Component {
       }
     })
      return this.setState({
-       default: [...setTable]
+       data: [...setTable]
      })
   }
 
@@ -50,7 +53,7 @@ class Chart extends Component {
     return(
       <DefaultChartStyle>
         <RadialChart
-          data={this.state.default}
+          data={this.state.data.length > 1 ? this.state.data : this.state.default}
           width={400}
           height={400}
           innerRadius={80}

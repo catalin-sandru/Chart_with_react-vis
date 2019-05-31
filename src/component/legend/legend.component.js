@@ -2,7 +2,6 @@ import React from 'react'
 import { LegendStyle } from './legend.style';
 
 const ChartLegend = ({state, toogleHighlightOn, resetTable, loadSecondTable}) => {
-
   return(
     <div>
         {state.map(({label, angle, style, key}) => {
