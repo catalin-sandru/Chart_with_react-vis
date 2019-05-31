@@ -1,7 +1,7 @@
 import React from 'react'
 import { LegendStyle } from './legend.style';
 
-const ChartLegend = ({state, toogleHighlightOn}) => {
+const ChartLegend = ({state, toogleHighlightOn, resetTable, loadSecondTable}) => {
 
   return(
     <div>
@@ -10,9 +10,7 @@ const ChartLegend = ({state, toogleHighlightOn}) => {
             <LegendStyle color={style} key={key}>
               <ul>
                 <li>
-                  <p onClick={() => 
-                    toogleHighlightOn(key)
-                  }>
+                  <p onClick={() => toogleHighlightOn(key)}>
                     {label} : 
                     <span>
                       {angle}
@@ -23,6 +21,10 @@ const ChartLegend = ({state, toogleHighlightOn}) => {
             </LegendStyle>
           )
         })}
+        <div>
+          <button onClick={resetTable}>Reset</button>
+          <button onClick={loadSecondTable}>Get Data</button>
+        </div>
       </div>
     )
 }

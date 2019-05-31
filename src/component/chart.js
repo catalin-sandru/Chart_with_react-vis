@@ -9,7 +9,6 @@ class Chart extends Component {
     super(props)
     this.state = {
       default: table1,
-      table2,
       toogleHighlightOn: this.toogleHighlightOn,
       toogleHighlightOff:this.toogleHighlightOff
     }
@@ -21,10 +20,29 @@ class Chart extends Component {
     if (newElement) {
       newElement.innerRadius = 2;
     }
-
     return this.setState({
       default: [...table1]
     })
+  }
+
+  resetTable = () => {
+    table1.forEach(i => i.innerRadius = 0)
+    return this.setState({
+      default: [...table1]
+    })
+  }
+
+  loadSecondTable = () => {
+    const setTable = table1.map(item => {
+      const findItem = table2.find(n => n.label === item.label)
+      const sum = findItem.angle + item.angle
+      return {
+        ...item, angle: sum
+      }
+    })
+     return this.setState({
+       default: [...setTable]
+     })
   }
 
   render() {
@@ -45,6 +63,8 @@ class Chart extends Component {
         <ChartLegend 
           state={table1}
           toogleHighlightOn={this.state.toogleHighlightOn}
+          resetTable={() => this.resetTable()}
+          loadSecondTable={() => this.loadSecondTable()}
         />
       </DefaultChartStyle>
     )
