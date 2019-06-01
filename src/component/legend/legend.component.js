@@ -1,29 +1,25 @@
 import React from 'react'
-import { LegendStyle } from './legend.style';
+import { LegendStyle, ButtonWrapper } from './legend.style';
 
-const ChartLegend = ({state, toogleHighlightOn, resetTable, loadSecondTable}) => {
+const ChartLegend = ({data, toogleHighlightOn, resetTable, loadSecondTable}) => {
   return(
     <div>
-        {state.map(({label, angle, style, key}) => {
+        {data.map(({label, angle, style, key}) => {
           return(
             <LegendStyle color={style} key={key}>
-              <ul>
-                <li>
-                  <p onClick={() => toogleHighlightOn(key)}>
-                    {label} : 
-                    <span>
-                      {angle}
-                    </span>
-                  </p>
-                </li>
-              </ul>
+              <p onClick={() => toogleHighlightOn(key)}>
+                {label} : 
+                <span>
+                  {angle}
+                </span>
+              </p>
             </LegendStyle>
           )
         })}
-        <div>
+        <ButtonWrapper>
           <button onClick={resetTable}>Reset</button>
           <button onClick={loadSecondTable}>Get Data</button>
-        </div>
+        </ButtonWrapper>
       </div>
     )
 }

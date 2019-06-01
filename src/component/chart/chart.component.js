@@ -5,34 +5,27 @@ import ChartLegend from '../legend/legend.component';
 import { DefaultChartStyle } from './chart.style';
 
 class Chart extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      default: table1,
-      data: [],
-      toogleHighlightOn: this.toogleHighlightOn,
-      toogleHighlightOff:this.toogleHighlightOff
-    }
+  state = {
+    default: table1,
+    data: [],
+    toogleHighlightOn: this.toogleHighlightOn
+  }
+
+  componentDidMount() {
+    this.resetTable()
   }
 
   toogleHighlightOn = key => {
-    this.state.default&&this.state.data.forEach(i => i.innerRadius = 0);
-    const newElement = this.state.default&&this.state.data.find(i => i.key === key);
-    if (newElement) {
-      newElement.innerRadius = 2;
-    }
-    return this.setState({
-      default: [...this.state.default],
-      data: [...this.state.data]
-    })
+    const data = this.state.data.map(
+      item => item.key === key 
+        ? {...item, innerRadius: 2} 
+        : {...item, innerRadius: 0}
+    )
+    this.setState({ data })
   }
 
   resetTable = () => {
-    table1.forEach(i => i.innerRadius = 0)
-    return this.setState({
-      default: [...table1],
-      data: []
-    })
+    this.setState({data: this.state.default})
   }
 
   loadSecondTable = () => {
@@ -43,17 +36,17 @@ class Chart extends Component {
         ...item, angle: sum
       }
     })
-     return this.setState({
-       data: [...setTable]
-     })
+    return this.setState({
+      data: [...setTable]
+    })
   }
 
   render() {
-    console.log(this.state)
+    const { data } = this.state
     return(
       <DefaultChartStyle>
         <RadialChart
-          data={this.state.data.length > 1 ? this.state.data : this.state.default}
+          data={data}
           width={400}
           height={400}
           innerRadius={80}
@@ -62,10 +55,11 @@ class Chart extends Component {
           radius={120}
           labelsRadiusMultiplier={0.9}
           colorRange={this.state.default.map(e => e.style)}
+          animation={"wobbly"}
         />
         <ChartLegend 
-          state={this.state.default}
-          toogleHighlightOn={this.state.toogleHighlightOn}
+          data={this.state.data}
+          toogleHighlightOn={this.toogleHighlightOn}
           resetTable={() => this.resetTable()}
           loadSecondTable={() => this.loadSecondTable()}
         />
