@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
 export const LegendStyle = styled.div`
-  align-items: center;
+  align-self: center;
+`
 
+export const LegendButtonsWrapper = styled.div`
   p {
     background: ${props => props.color.fill};
     color: #fff;

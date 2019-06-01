@@ -1,26 +1,23 @@
 import React from 'react'
-import { LegendStyle, ButtonWrapper } from './legend.style';
+import { LegendStyle, ButtonWrapper, LegendButtonsWrapper } from './legend.style';
 
 const ChartLegend = ({data, toogleHighlightOn, resetTable, loadSecondTable}) => {
   return(
-    <div>
+    <LegendStyle>
         {data.map(({label, angle, style, key}) => {
           return(
-            <LegendStyle color={style} key={key}>
+            <LegendButtonsWrapper color={style} key={key}>
               <p onClick={() => toogleHighlightOn(key)}>
-                {label} : 
-                <span>
-                  {angle}
-                </span>
+                {label}: {angle}
               </p>
-            </LegendStyle>
+            </LegendButtonsWrapper>
           )
         })}
         <ButtonWrapper>
           <button onClick={resetTable}>Reset</button>
           <button onClick={loadSecondTable}>Get Data</button>
         </ButtonWrapper>
-      </div>
+      </LegendStyle>
     )
 }
     
