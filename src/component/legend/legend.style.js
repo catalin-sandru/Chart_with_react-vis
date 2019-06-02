@@ -27,6 +27,7 @@ export const ButtonWrapper = styled.div`
   button {
     padding: 0.4rem;
     margin: 0.5rem 0;
+    border: 3px solid #A9A9A9;
     border-radius: 0.3rem;
     cursor: pointer;
     outline: none;

@@ -54,11 +54,10 @@ class Chart extends Component {
           padAngle={0.03}
           radius={120}
           labelsRadiusMultiplier={0.9}
-          colorRange={this.state.default.map(e => e.style)}
           animation={"wobbly"}
         />
         <ChartLegend 
-          data={this.state.data}
+          data={data}
           toogleHighlightOn={this.toogleHighlightOn}
           resetTable={() => this.resetTable()}
           loadSecondTable={() => this.loadSecondTable()}

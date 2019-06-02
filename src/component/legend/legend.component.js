@@ -14,8 +14,8 @@ const ChartLegend = ({data, toogleHighlightOn, resetTable, loadSecondTable}) => 
           )
         })}
         <ButtonWrapper>
-          <button onClick={resetTable}>Reset</button>
-          <button onClick={loadSecondTable}>Get Data</button>
+          <button onClick={resetTable}>Table 1</button>
+          <button onClick={loadSecondTable}>Table 2</button>
         </ButtonWrapper>
       </LegendStyle>
     )
